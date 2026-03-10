@@ -32,3 +32,23 @@ exports.createOrder = async (req, res) => {
     });
   }
 };
+
+// Função para buscar um pedido específico pelo orderId
+exports.getOrderByNumber = async (req, res) => {
+  try {
+    const { orderId } = req.params; // Captura o parâmetro da URL 
+
+    const order = await Order.findOne({ orderId: orderId });
+
+    if (!order) {
+      return res.status(404).json({ message: "Pedido não encontrado" });
+    }
+
+    return res.status(200).json(order);
+  } catch (error) {
+    return res.status(500).json({ 
+      message: "Erro ao buscar pedido", 
+      error: error.message 
+    });
+  }
+};

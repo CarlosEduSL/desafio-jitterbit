@@ -9,6 +9,12 @@ connectDB();
 
 app.use(express.json());
 
+// Importando rotas de pedidos
+const orderRoutes = require('../routes/orderRoutes');
+
+// Usando as rotas de pedidos [cite: 15]
+app.use('/order', orderRoutes);
+
 app.get('/', (req, res) => {
   res.send('API Desafio Jitterbit Rodando! 🚀');
 });
